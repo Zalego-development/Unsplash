@@ -15,16 +15,19 @@ def unsplash_keywords():
         'ugly girl', 'ugly boy', 'little boy', 'little girl', 'chinese lady', 'dirty boy',
         'asian woman'
         ]
+    page = 1
+    while True:
+        ####---------- CHANGE i BELOW TO THE KEYWORD INDEX FROM ABOVE -----------#######
 
-    for keyword in key_words:
-        url = f"https://api.unsplash.com/search/photos?query={keyword}&client_id=YOUR-API-KEY"
-
+        url = f"https://api.unsplash.com/search/photos?query={key_words[i]}&client_id=YOUR-API-KEY&per_page=30&page={page}"
         headers = CaseInsensitiveDict()
         headers["Accept"] = "application/json"
         headers["Authorization"] = "Bearer {token}"
-
         resp = requests.get(url, headers=headers)
         our_json = json.loads(resp.text)
-        time.sleep(1)
+        with open('photos2.txt', 'a') as pt:
+            pt.write("%s\n" % our_json)
+        page+=1
+        time.sleep(72)
 
-    return our_json
+unsplash_keywords()
