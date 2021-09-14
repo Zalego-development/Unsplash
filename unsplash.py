@@ -1,5 +1,4 @@
 import requests
-import time
 import json
 from requests.structures import CaseInsensitiveDict
 
@@ -25,9 +24,8 @@ def unsplash_keywords():
         headers["Authorization"] = "Bearer {token}"
         resp = requests.get(url, headers=headers)
         our_json = json.loads(resp.text)
-        with open('photos2.txt', 'a') as pt:
+        with open('YOUR-FILENAME.txt', 'a') as pt:
             pt.write("%s\n" % our_json)
         page+=1
-        time.sleep(72)
 
 unsplash_keywords()
